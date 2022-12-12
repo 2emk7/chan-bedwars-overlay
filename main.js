@@ -46,7 +46,7 @@ fs.readFile('C:/Users/Coach/AppData/Roaming/.minecraft/logs/blclient/minecraft/l
           try {
             await scrapeProduct(('https://bwstats.shivam.pro/user/' + values));
           } catch {
-            console.log('\x1b[36m', values ,'\x1b[0m' + 'This player has never played bedwars');
+            console.log('\x1b[36m', values,'\x1b[0m' + 'This player has never played bedwars');
             console.log("---------------------------------------------");
           }
       async function scrapeProduct(url) {
@@ -72,7 +72,7 @@ fs.readFile('C:/Users/Coach/AppData/Roaming/.minecraft/logs/blclient/minecraft/l
           const wlr = await txt3.jsonValue();
       
       
-          console.log('\x1b[36m', values ,'\x1b[0m' + "   " + lvl + "   FKDR - "   + fkdr + "   BBLR - " + BBLR + "   WLR - " + wlr);
+          console.log('\x1b[36m', values,'\x1b[0m' + "   " + lvl + "   FKDR - "   + fkdr + "   BBLR - " + BBLR + "   WLR - " + wlr);
         
           console.log("---------------------------------------------");
       
