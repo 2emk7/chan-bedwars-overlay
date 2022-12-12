@@ -58,11 +58,11 @@ fs.readFile('C:/Users/Coach/AppData/Roaming/.minecraft/logs/blclient/minecraft/l
           const txt2 = await el2.getProperty('textContent');
           const lvl = await txt2.jsonValue();
       
-          const [el] = await page.$x('/html/body/div/main/div[1]/div[2]/p[3]');
+          const [el] = await page.$x('/html/body/div/main/div[1]/div[2]/div/table/tbody/tr[11]/td[2]');
           const txt = await el.getProperty('textContent');
           const fkdr = await txt.jsonValue();
       
-          const [el1] = await page.$x('/html/body/div/main/div[1]/div[2]/p[4]');
+          const [el1] = await page.$x('/html/body/div/main/div[1]/div[2]/div/table/tbody/tr[17]/td[2]');
           const txt1 = await el1.getProperty('textContent');
           const BBLR = await txt1.jsonValue();
       
@@ -72,9 +72,9 @@ fs.readFile('C:/Users/Coach/AppData/Roaming/.minecraft/logs/blclient/minecraft/l
       
       
           console.log(lvl);
-          console.log(fkdr);
-          console.log(BBLR);
-          console.log("Win/Loss Ratio (WLR): " + wlr);
+          console.log("FKDR - " + fkdr);
+          console.log("BBLR - " + BBLR);
+          console.log("WLR - " + wlr);
           console.log("---------------------------------------------");
       
       }
