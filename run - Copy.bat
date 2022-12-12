@@ -1,0 +1,2 @@
+node other.js
+PAUSE
