@@ -1,8 +1,6 @@
 console.clear();
 const puppeteer = require('puppeteer');
 const fs = require('fs');
-const prompt = require('prompt-sync')();
-
 process.setMaxListeners(0);
 console.log(`
 _______  _______  _______  ___            _______  __   __  _______ 
@@ -15,7 +13,6 @@ _______  _______  _______  ___            _______  __   __  _______
                                      
 `);
 
-function runCode() {
 
 fs.readFile('C:/Users/Coach/AppData/Roaming/.minecraft/logs/blclient/minecraft/latest.log', 'utf8', async (err, data) => {
   if (err) throw err;
@@ -33,6 +30,7 @@ fs.readFile('C:/Users/Coach/AppData/Roaming/.minecraft/logs/blclient/minecraft/l
         break;
       }
   
+      // Check if the current value is the first value and remove the 'ONLINE: ' string if it is
       let value = data.substring(index, commaIndex).trim();
       if (values.length === 0 && value.startsWith('ONLINE: ')) {
         value = value.substring('ONLINE: '.length);
@@ -86,8 +84,3 @@ fs.readFile('C:/Users/Coach/AppData/Roaming/.minecraft/logs/blclient/minecraft/l
   
 });
 
-}
-const q = prompt("ask?");
-if (q =="rr") {
-  return;
-}
