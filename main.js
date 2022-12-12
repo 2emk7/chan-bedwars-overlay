@@ -2,6 +2,7 @@ console.clear();
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 process.setMaxListeners(0);
+
 console.log(`
 _______  _______  _______  ___            _______  __   __  _______ 
 |       ||       ||   _   ||   |          |       ||  |_|  ||       |
@@ -34,18 +35,18 @@ fs.readFile('C:/Users/Coach/AppData/Roaming/.minecraft/logs/blclient/minecraft/l
       let value = data.substring(index, commaIndex).trim();
       if (values.length === 0 && value.startsWith('ONLINE: ')) {
         value = value.substring('ONLINE: '.length);
+
       }
       values.push(value);
   
       index = commaIndex + 1;
-      console.log(values);
       
           const url = 'https://bwstats.shivam.pro/user/' + values;
       
           try {
             await scrapeProduct(('https://bwstats.shivam.pro/user/' + values));
           } catch {
-            console.log('This player has never played bedwars');
+            console.log('\x1b[36m', values ,'\x1b[0m' + 'This player has never played bedwars');
             console.log("---------------------------------------------");
           }
       async function scrapeProduct(url) {
@@ -71,10 +72,8 @@ fs.readFile('C:/Users/Coach/AppData/Roaming/.minecraft/logs/blclient/minecraft/l
           const wlr = await txt3.jsonValue();
       
       
-          console.log(lvl);
-          console.log("FKDR - " + fkdr);
-          console.log("BBLR - " + BBLR);
-          console.log("WLR - " + wlr);
+          console.log('\x1b[36m', values ,'\x1b[0m' + "   " + lvl + "   FKDR - "   + fkdr + "   BBLR - " + BBLR + "   WLR - " + wlr);
+        
           console.log("---------------------------------------------");
       
       }
