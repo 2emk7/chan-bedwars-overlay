@@ -31,7 +31,6 @@ fs.readFile('C:/Users/Coach/AppData/Roaming/.minecraft/logs/blclient/minecraft/l
         break;
       }
   
-      // Check if the current value is the first value and remove the 'ONLINE: ' string if it is
       let value = data.substring(index, commaIndex).trim();
       if (values.length === 0 && value.startsWith('ONLINE: ')) {
         value = value.substring('ONLINE: '.length);
