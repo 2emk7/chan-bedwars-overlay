@@ -2,6 +2,9 @@ console.clear();
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 const prompt = require('prompt-sync')();
+const Hypixel = require("hypixel-api-reborn")
+const hypixel = new Hypixel.Client('77684239-5a07-4ea4-bc9c-2f07db9fddb7');
+
 
 process.setMaxListeners(0);
 console.log(`
@@ -63,50 +66,18 @@ fs.readFile('C:/Users/Coach/AppData/Roaming/.minecraft/logs/blclient/minecraft/l
   
       index = commaIndex + 1;
       
-          const url = 'https://bwstats.shivam.pro/user/' + values;
       
-          try {
-            await scrapeProduct(('https://bwstats.shivam.pro/user/' + values));
-          } catch {
-            console.log('\x1b[36m', values,'\x1b[0m' + 'This player has never played bedwars');
-            console.log("---------------------------------------------");
-          }
-          async function scrapeProduct(url) {
-         
-          const browser = await puppeteer.launch();
-          const page = await browser.newPage();
-          await page.goto(url);
-      
-          const [el2] = await page.$x('/html/body/div/main/div[1]/div[2]/p[1]');
-          const txt2 = await el2.getProperty('textContent');
-          const lvl = await txt2.jsonValue();
-      
-          const [el] = await page.$x('/html/body/div/main/div[1]/div[2]/div/table/tbody/tr[11]/td[2]');
-          const txt = await el.getProperty('textContent');
-          const fkdr = await txt.jsonValue();
-      
-          const [el1] = await page.$x('/html/body/div/main/div[1]/div[2]/div/table/tbody/tr[17]/td[2]');
-          const txt1 = await el1.getProperty('textContent');
-          const BBLR = await txt1.jsonValue();
-      
-          const [el3] = await page.$x('/html/body/div/main/div[1]/div[2]/div/table/tbody/tr[4]/td[2]');
-          const txt3 = await el3.getProperty('textContent');
-          const wlr = await txt3.jsonValue();
-      
-      
-          console.log('\x1b[36m', values,'\x1b[0m' + "   " + lvl + "   FKDR - "   + fkdr + "   BBLR - " + BBLR + "   WLR - " + wlr);
-        
-          console.log("---------------------------------------------");
-      
+      try {
+        await hypixel.getPlayer(value).then(player => {
+          console.log('\x1b[36m', values,'\x1b[0m' + "  LVL - " + player.stats.bedwars.level + "   FKDR - " + player.stats.bedwars.finalKDRatio + "   WINS - " + player.stats.bedwars.wins)
+        });
+      } catch {
+        console.log('player has no bedwars stats');
+      }
+    
       }
     }  
-  }
-  
-   runMe()
-});
-
+    runMe()
+})
 }
-
- runMe()
-
-
+runMe()
