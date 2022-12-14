@@ -1,9 +1,10 @@
 console.clear();
+console.clear();
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 const prompt = require('prompt-sync')();
 const Hypixel = require("hypixel-api-reborn")
-const hypixel = new Hypixel.Client('API HERE');
+const hypixel = new Hypixel.Client('APIHERE');
 
 
 process.setMaxListeners(0);
@@ -69,7 +70,51 @@ fs.readFile('C:/Users/Coach/AppData/Roaming/.minecraft/logs/blclient/minecraft/l
       
       try {
         await hypixel.getPlayer(value).then(player => {
-          console.log('\x1b[36m', values,'\x1b[0m' + "  LVL - " + player.stats.bedwars.level + "   FKDR - " + player.stats.bedwars.finalKDRatio + "   WINS - " + player.stats.bedwars.wins)
+          let fkdr = player.stats.bedwars.finalKDRatio;
+          let color;
+      
+          if (fkdr > 50) {
+            color = '\x1b[95m'; // Pink
+          } else if (fkdr > 20) {
+            color = '\x1b[35m'; // Purple
+          } else if (fkdr > 10) {
+            color = '\x1b[34m'; // Blue
+          } else if (fkdr > 8) {
+            color = '\x1b[36m'; // Cyan
+          } else if (fkdr > 6) {
+            color = '\x1b[31m'; // Red
+          } else if (fkdr > 4) {
+            color = '\x1b[32m'; // Green
+          } else if (fkdr > 2) {
+            color = '\x1b[33m'; // Yellow
+          } else {
+            color = '\x1b[0m'; // Default (no color)
+          }
+
+
+          let wins = player.stats.bedwars.wins;
+          let color2;
+
+          if (wins > 15000) {
+            color2 = '\x1b[95m'; // Pink
+          } else if (wins > 10000) {
+            color2 = '\x1b[35m'; // Purple
+          } else if (wins > 8000) {
+            color2 = '\x1b[34m'; // Blue
+          } else if (wins >6000) {
+            color2 = '\x1b[36m'; // Cyan
+          } else if (wins > 4000) {
+            color2 = '\x1b[31m'; // Red
+          } else if (wins > 1500) {
+            color2 = '\x1b[32m'; // Green
+          } else if (wins > 500) {
+            color2 = '\x1b[33m'; // Yellow
+          } else {
+            color2 = '\x1b[0m'; // Default (no color)
+          }
+      
+          console.log('\x1b[0m', values + '\x1b[0m' +"  LVL - " + player.stats.bedwars.level + '\x1b[0m' +"  WS - " + player.stats.bedwars.winstreak + '\x1b[0m' +"   FKDR - " + color, fkdr + '\x1b[0m' +"   WINS - " + color2, player.stats.bedwars.wins)
+          console.log('\x1b[0m' + "---------------------------------------")
         });
       } catch {
         console.log('player has no bedwars stats');
