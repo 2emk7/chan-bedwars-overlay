@@ -1,77 +1,42 @@
-console.clear();
-console.clear();
-const puppeteer = require('puppeteer');
 const fs = require('fs');
 const prompt = require('prompt-sync')();
-const Hypixel = require("hypixel-api-reborn")
-const hypixel = new Hypixel.Client('APIHERE');
+const Hypixel = require('hypixel-api-reborn');
 
+const hypixel = new Hypixel.Client('77684239-5a07-4ea4-bc9c-2f07db9fddb7');
 
-process.setMaxListeners(0);
-console.log(`
- _______  _______  _______  ___            _______  __   __  _______ 
+const filePath = 'C:/Users/Coach/AppData/Roaming/.minecraft/logs/blclient/minecraft/latest.log';
+const keyword = 'ONLINE: ';
+let lastTrimmed = '';
+console.clear();
+console.log(` _______  _______  _______  ___            _______  __   __  _______ 
 |       ||       ||   _   ||   |          |       ||  |_|  ||       |
 |       ||   _   ||  |_|  ||   |          |    ___||       ||    ___|
 |       ||  | |  ||       ||   |          |   |___ |       ||   |___ 
 |      _||  |_|  ||       ||   |___  ___  |    ___| |     | |    ___|
 |     |_ |       ||   _   ||       ||   | |   |___ |   _   ||   |___ 
-|_______||_______||__| |__||_______||___| |_______||__| |__||_______|
-                                     
+|_______||_______||__| |__||_______||___| |_______||__| |__||_______|                                    
 `);
+console.log(`Created By 2emk7
 
-function runMe() {
-  const age = prompt(' run? (Y/N) ');
+`)
+const checkForUpdates = () => {
+    
+  fs.promises.readFile(filePath, 'utf8')
+    .then(data => {
+      if (data.includes(keyword)) {
+        const index = data.lastIndexOf(keyword);
+        const line = data.substring(index);
+        const parts = line.split('\n');
+        const trimmed = parts[0].trim();
 
-  if(age == 'Y'){
-    console.clear();
-    console.log(`
- _______  _______  _______  ___            _______  __   __  _______ 
-|       ||       ||   _   ||   |          |       ||  |_|  ||       |
-|       ||   _   ||  |_|  ||   |          |    ___||       ||    ___|
-|       ||  | |  ||       ||   |          |   |___ |       ||   |___ 
-|      _||  |_|  ||       ||   |___  ___  |    ___| |     | |    ___|
-|     |_ |       ||   _   ||       ||   | |   |___ |   _   ||   |___ 
-|_______||_______||__| |__||_______||___| |_______||__| |__||_______|
-                                     
-`);
-    run()
-  }
-  else{
-    console.log("stop");
-  }
-}
-
-async function run(){
-fs.readFile('C:/Users/Coach/AppData/Roaming/.minecraft/logs/blclient/minecraft/latest.log', 'utf8', async (err, data) => {
-  if (err) throw err;
-
-  let index = data.lastIndexOf('ONLINE: ');
-
-  if (index !== -1) {
-    const endIndex = data.indexOf('\n', index);
-  
-    while (true) {
-      const values = [];
-  
-      const commaIndex = data.indexOf(',', index);
-      if (commaIndex === -1 || commaIndex > endIndex) {
-        break;
-      }
-  
-      let value = data.substring(index, commaIndex).trim();
-      if (values.length === 0 && value.startsWith('ONLINE: ')) {
-        value = value.substring('ONLINE: '.length);
-
-      }
-      values.push(value);
-  
-      index = commaIndex + 1;
-      
-      
-      try {
-        await hypixel.getPlayer(value).then(player => {
-          let fkdr = player.stats.bedwars.finalKDRatio;
-          let color;
+        if (trimmed !== lastTrimmed) {
+          const names = trimmed.split(', ');
+          names.forEach(async name => {
+            const playerName = name.replace(keyword, '');
+            try {
+              const player = await hypixel.getPlayer(playerName);
+              const fkdr = player.stats.bedwars.finalKDRatio;
+              let color;
       
           if (fkdr > 50) {
             color = '\x1b[95m'; // Pink
@@ -113,16 +78,22 @@ fs.readFile('C:/Users/Coach/AppData/Roaming/.minecraft/logs/blclient/minecraft/l
             color2 = '\x1b[0m'; // Default (no color)
           }
       
-          console.log('\x1b[0m', values + '\x1b[0m' +"  LVL - " + player.stats.bedwars.level + '\x1b[0m' +"  WS - " + player.stats.bedwars.winstreak + '\x1b[0m' +"   FKDR - " + color, fkdr + '\x1b[0m' +"   WINS - " + color2, player.stats.bedwars.wins)
+          let lvl = player.stats.bedwars.level;
+
+          
+          console.log('\x1b[0m', playerName + '\x1b[0m' +"  LVL - " + lvl + '\x1b[0m' +"  WS - " + player.stats.bedwars.winstreak + '\x1b[0m' +"   FKDR - " + color, fkdr + '\x1b[0m' +"   WINS - " + color2, player.stats.bedwars.wins)
           console.log('\x1b[0m' + "---------------------------------------")
-        });
-      } catch {
-        console.log('player has no bedwars stats');
+          } catch (err) {
+            var nick = playerName;
+            console.log(`${nick} is nicked`);
+            console.log('\x1b[0m' + "---------------------------------------")
+          }
+        }
+          )
+        lastTrimmed = trimmed;
       }
-    
-      }
-    }  
-    runMe()
-})
-}
-runMe()
+    }
+  });
+};
+
+setInterval(checkForUpdates, 1000);
