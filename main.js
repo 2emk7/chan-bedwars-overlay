@@ -16,13 +16,13 @@ console.log(` _______  _______  _______  ___            _______  __   __  ______
 |     |_ |       ||   _   ||       ||   | |   |___ |   _   ||   |___ 
 |_______||_______||__| |__||_______||___| |_______||__| |__||_______|                                    
 `);
-console.log(`Created By 2emk7
+console.log(`Created By 2emk7`);
 
-`)
+
 const checkForUpdates = () => {
-    
   fs.promises.readFile(filePath, 'utf8')
     .then(data => {
+    
       if (data.includes(keyword)) {
         const index = data.lastIndexOf(keyword);
         const line = data.substring(index);
@@ -30,6 +30,15 @@ const checkForUpdates = () => {
         const trimmed = parts[0].trim();
 
         if (trimmed !== lastTrimmed) {
+          console.clear();
+          console.log(` _______  _______  _______  ___            _______  __   __  _______ 
+|       ||       ||   _   ||   |          |       ||  |_|  ||       |
+|       ||   _   ||  |_|  ||   |          |    ___||       ||    ___|
+|       ||  | |  ||       ||   |          |   |___ |       ||   |___ 
+|      _||  |_|  ||       ||   |___  ___  |    ___| |     | |    ___|
+|     |_ |       ||   _   ||       ||   | |   |___ |   _   ||   |___ 
+|_______||_______||__| |__||_______||___| |_______||__| |__||_______|                                    
+`);
           const names = trimmed.split(', ');
           names.forEach(async name => {
             const playerName = name.replace(keyword, '');
@@ -92,8 +101,11 @@ const checkForUpdates = () => {
           )
         lastTrimmed = trimmed;
       }
+      
     }
+    
   });
+  
 };
 
 setInterval(checkForUpdates, 1000);
