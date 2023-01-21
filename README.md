@@ -1,3 +1,3 @@
-# bedwars-overlay-beta
+# coal.exe
 
-Just a beta version of a Hypixel Bedwars overlay
+Super simple bedwars stats overlay for BLC
