@@ -2,7 +2,7 @@ const fs = require('fs');
 const prompt = require('prompt-sync')();
 const Hypixel = require('hypixel-api-reborn');
 
-const hypixel = new Hypixel.Client('ENTER TOKEN HERE');
+const hypixel = new Hypixel.Client('ENTER API HERE');
 
 const filePath = 'C:/Users/Coach/AppData/Roaming/.minecraft/logs/blclient/minecraft/latest.log';
 const keyword = 'ONLINE: ';
