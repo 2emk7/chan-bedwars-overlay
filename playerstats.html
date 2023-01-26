@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="navigation-bar">
+      <div id="navigation-container">
+        <img src="chan.png" width="95" height="35">
+        <ul>
+          <form id="searchForm" onsubmit="getPlayerStats()" class="nodrag">
+            <input type="text" id="searchBar" placeholder="Enter player name">
+            <input type="submit" value="Search">
+          </form>
+          <li><a type="button" class="nodrag" href="#">Home</a></li>
+          <li><a type="button" class="nodrag" onclick="clearTable()">reload</a></li>
+          <li><a type="button" class="nodrag" onclick="window.close()">close</a></li>
+        </ul>
+      </div>
+    </div>
+    <table id="table">
+      <tr>
+        <th>IGN</th>
+        <th>Wins</th>
+        <th>Final Kills</th>
+        <th>FKDR</th>
+      </tr>
+    </table>
+    <script>
+  
+  function clearTable() {
+    const table = document.getElementById("table");
+    while(table.rows.length > 1) {
+      table.deleteRow(1);
+    }
+  }
+  
+  // Call the getPlayerStats function when the form is submitted
+  document.getElementById("searchForm").addEventListener("submit", getPlayerStats());
+</script>
+  </body>
+</html>
