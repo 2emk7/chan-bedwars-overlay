@@ -1,8 +1,8 @@
 const { app, BrowserWindow, screen } = require('electron');
 const fs = require('fs');
 const Hypixel = require('hypixel-api-reborn');
-const hypixel = new Hypixel.Client('77684239-5a07-4ea4-bc9c-2f07db9fddb7');
-const filePath = 'C:/Users/Coach/AppData/Roaming/.minecraft/logs/blclient/minecraft/latest.log';
+const hypixel = new Hypixel.Client('REPLACE THIS TEXT WITH YOUR API');
+const filePath = 'REPLACE THIS TEXT WITH PATH TO YOUR CHAT LOG MAKE SURE THE / ARE SLANTING RIGHT LIKE THIS -> /';
 const keyword = 'ONLINE: ';
 const keyword2 = '. FINAL KILL!';
 const keyword3 = 'has invited you to join their party!';
