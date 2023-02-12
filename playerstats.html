@@ -2,32 +2,85 @@
 <html>
   <head>
     <link rel="stylesheet" href="style.css" />
+    
   </head>
   <body>
+    
     <div class="navigation-bar">
       <div id="navigation-container">
         <img src="chan.png" width="95" height="35">
         <ul>
-          <form id="searchForm" onsubmit="getPlayerStats()" class="nodrag">
-            <input type="text" id="searchBar" placeholder="Enter player name">
-            <input type="submit" value="Search">
-          </form>
-          <li><a type="button" class="nodrag" href="#">Home</a></li>
-          <li><a type="button" class="nodrag" onclick="clearTable()">reload</a></li>
+      
+
+          <li><a type="button" class="nodrag" onclick="clearTable()">clear</a></li>
           <li><a type="button" class="nodrag" onclick="window.close()">close</a></li>
         </ul>
       </div>
     </div>
     <table id="table">
       <tr>
+        <th>av</th>
+        <th>lvl</th>
         <th>IGN</th>
-        <th>Wins</th>
-        <th>Final Kills</th>
+        <th>WS</th>
         <th>FKDR</th>
+        <th>WLR</th>
+        <th>Finals</th>
+        <th>Wins</th>
       </tr>
     </table>
+    <style>
+      
+      .vip {
+        color: #55FF55 ;
+        text-shadow: 0.4px 0.4px  rgba(0,0,0,0.5);
+
+      }
+      .vip\+ {
+        color: #55FF55 ;
+        text-shadow: 0.4px 0.4px  rgba(0,0,0,0.5);
+
+      }
+      .mvp {
+        color: #55FFFF ;
+        text-shadow: 0.4px 0.4px  rgba(0,0,0,0.5);
+
+      }
+      .mvp\+ {
+        color: #55FFFF ;
+        text-shadow: 0.4px 0.4px  rgba(0,0,0,0.5);
+
+      }
+      .mvp\+\+ {
+        color: #FFAA00;
+        text-shadow: 0.4px 0.4px  rgba(0,0,0,0.5);
+
+      }
+      .default{
+        color: #AAAAAA;
+        text-shadow: 0.4px 0.4px  rgba(0,0,0,0.5);
+
+      }
+      .player-name {
+  display: inline-block;
+  position: relative;
+}
+
+.player-name:hover:after {
+  content: attr(title);
+  display: block;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+      
+    </style>
     <script>
-  
   function clearTable() {
     const table = document.getElementById("table");
     while(table.rows.length > 1) {
@@ -35,8 +88,8 @@
     }
   }
   
-  // Call the getPlayerStats function when the form is submitted
-  document.getElementById("searchForm").addEventListener("submit", getPlayerStats());
+  document.getElementById("searchForm").addEventListener("submit", search);
 </script>
+
   </body>
 </html>
