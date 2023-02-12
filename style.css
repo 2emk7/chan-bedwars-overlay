@@ -1,4 +1,7 @@
-
+body {
+    font-size: 17px;
+    background-color: rgba(36, 35, 35, 0.658);
+    }
 #navigation-container {
     -webkit-app-region: drag;
     position: relative;
@@ -27,4 +30,18 @@ a {
 .nodrag {
     -webkit-app-region: no-drag;
 }
+hr {
+    width: 400px;
+    height: 1px;
+    border: none;
+    background-color: black;
+    margin: 0;
+    padding: 0;
+  }
+  table th {
+    padding: 10px;
+  }
+  table td, table th {
+    text-align: center;
+  }
   
